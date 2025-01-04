@@ -2,16 +2,16 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CaroselSlider extends StatefulWidget {
-   CaroselSlider({
+class CaroselSliderScreen extends StatefulWidget {
+   CaroselSliderScreen({
     super.key,
   });
 
   @override
-  State<CaroselSlider> createState() => _CaroselSliderState();
+  State<CaroselSliderScreen> createState() => _CaroselSliderScreenState();
 }
 
-class _CaroselSliderState extends State<CaroselSlider> {
+class _CaroselSliderScreenState extends State<CaroselSliderScreen> {
 
 final ValueNotifier<int> _selectIndex=ValueNotifier(0);
 final CarouselController _carouselController = CarouselController();

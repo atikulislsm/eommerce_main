@@ -6,6 +6,9 @@ import 'package:ecommerce/fetures/auth/ui/screens/profile_screens.dart';
 import 'package:ecommerce/fetures/auth/ui/screens/splashscreen.dart';
 import 'package:ecommerce/fetures/catagory/ui/screens/catagory_screens.dart';
 import 'package:ecommerce/fetures/home/ui/screens/home_screens.dart';
+import 'package:ecommerce/fetures/product/ui/screens/product_details_screen.dart';
+import 'package:ecommerce/fetures/product/ui/screens/product_list_screen.dart';
+import 'package:ecommerce/fetures/wishlist/ui/screens/wish_list_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'fetures/auth/ui/screens/email_verification_screens.dart';
@@ -24,15 +27,46 @@ class MyApp extends StatelessWidget {
       theme: AppThemeData.lightThemeData,
       darkTheme: AppThemeData.darkThemeData,
       initialBinding: ControllerBinder(),
-      routes: < String, WidgetBuilder >{
-        '/': (context) => Splashscreen(),
-        EmailVerificationScreens.name: (context) => EmailVerificationScreens(),
-        ProfileScreens.name: (context) => ProfileScreens(),
-        OtpVerificationScreens.name: (context) => OtpVerificationScreens(),
-        HomeScreens.name: (context) => HomeScreens(),
-        MainBottomNavScreen.name: (context) =>MainBottomNavScreen(),
-        CatagoryScreens.name: (context) =>CatagoryScreens(),
+      onGenerateRoute: (RouteSettings setting){
+        late Widget widget;
+        if(setting.name==Splashscreen.name){
+          widget= const Splashscreen();
+        }else if(setting.name==EmailVerificationScreens.name){
+          widget=const EmailVerificationScreens();
+        }else if(setting.name==ProfileScreens.name){
+          widget=const ProfileScreens();
+        }else if(setting.name==OtpVerificationScreens.name){
+          widget=const OtpVerificationScreens();
+        }else if(setting.name==HomeScreens.name){
+          widget=const HomeScreens();
+        }else if(setting.name==MainBottomNavScreen.name){
+          widget=const MainBottomNavScreen();
+        }else if(setting.name==CatagoryScreens.name){
+          widget=const CatagoryScreens();
+        }else if(setting.name==ProductListScreen.name){
+          String name=setting.arguments as String;
+          widget= ProductListScreen(catgoryName: name);
+        }else if(setting.name==ProductDetailsScreen.name){
+          int productId=setting.arguments as int;
+          widget=ProductDetailsScreen(productId: productId,);
+        }else if(setting.name==WishListScreens.name){
+          // int wishListid=setting.arguments as int;
+          widget=const WishListScreens();
+        }
+        return MaterialPageRoute(builder: (ctx){
+          return widget;
+        });
       },
+      // routes: {
+      //   '/': (context) => Splashscreen(),
+      //   EmailVerificationScreens.name: (context) => EmailVerificationScreens(),
+      //   ProfileScreens.name: (context) => ProfileScreens(),
+      //   OtpVerificationScreens.name: (context) => OtpVerificationScreens(),
+      //   HomeScreens.name: (context) => HomeScreens(),
+      //   MainBottomNavScreen.name: (context) =>MainBottomNavScreen(),
+      //   CatagoryScreens.name: (context) =>CatagoryScreens(),
+      //   ProductListScreen.name:(context) => ProductListScreen(catgoryName:'product item',),
+      // },
     );
   }
 }

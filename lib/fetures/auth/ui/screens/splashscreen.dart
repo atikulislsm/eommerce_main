@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
-
+  static const String name='/';
   @override
   State<Splashscreen> createState() => _SplashscreenState();
 }

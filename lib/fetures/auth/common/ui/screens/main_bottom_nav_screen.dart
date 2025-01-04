@@ -1,9 +1,9 @@
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/fetures/auth/common/ui/controller/main_bottom_nav_controller.dart';
-import 'package:ecommerce/fetures/home/ui/screens/cart_screens.dart';
+import 'package:ecommerce/fetures/cart/ui/screens/cart_screens.dart';
 import 'package:ecommerce/fetures/catagory/ui/screens/catagory_screens.dart';
 import 'package:ecommerce/fetures/home/ui/screens/home_screens.dart';
-import 'package:ecommerce/fetures/home/ui/screens/wish_screens.dart';
+import 'package:ecommerce/fetures/wishlist/ui/screens/wish_list_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -20,7 +20,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     const HomeScreens(),
     const CatagoryScreens(),
     const CartScreens(),
-    const WishScreens(),
+    const WishListScreens()
   ];
   @override
   Widget build(BuildContext context) {
