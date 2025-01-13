@@ -48,7 +48,7 @@ class _HomeScreensState extends State<HomeScreens> {
                ),
               const SizedBox(height: 16,),
               HomeSectionHeader(title: 'Popular', onTap: (){
-                Navigator.pushNamed(context, ProductListScreen.name, arguments: 'Popular Product');
+                Navigator.pushNamed(context, ProductListScreen.name, arguments: 'Popular' ,);
               }
               ),
               const SizedBox(height: 8,),

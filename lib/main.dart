@@ -8,6 +8,8 @@ import 'package:ecommerce/fetures/catagory/ui/screens/catagory_screens.dart';
 import 'package:ecommerce/fetures/home/ui/screens/home_screens.dart';
 import 'package:ecommerce/fetures/product/ui/screens/product_details_screen.dart';
 import 'package:ecommerce/fetures/product/ui/screens/product_list_screen.dart';
+import 'package:ecommerce/fetures/product/ui/screens/review_create_screen.dart';
+import 'package:ecommerce/fetures/product/ui/screens/review_screens.dart';
 import 'package:ecommerce/fetures/wishlist/ui/screens/wish_list_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,6 +54,10 @@ class MyApp extends StatelessWidget {
         }else if(setting.name==WishListScreens.name){
           // int wishListid=setting.arguments as int;
           widget=const WishListScreens();
+        }else if(setting.name==ReviewScreens.name){
+          widget=const ReviewScreens();
+        }else if(setting.name==ReviewCreateScreen.name){
+          widget=const ReviewCreateScreen();
         }
         return MaterialPageRoute(builder: (ctx){
           return widget;

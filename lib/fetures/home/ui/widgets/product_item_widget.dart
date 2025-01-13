@@ -1,4 +1,5 @@
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/app/asset_path.dart';
 import 'package:ecommerce/fetures/product/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class ProductItemWidget extends StatelessWidget {
                     ),
                     color: AppColors.themeColor.withOpacity(0.1),
                   ),
-                  child: Image.asset('assets/images/logo.png', width: 140,height: 90,)
+                  child: Image.asset(AssetsPath.damiLogo, width: 140,height: 90,)
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

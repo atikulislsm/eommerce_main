@@ -1,4 +1,5 @@
 import 'package:ecommerce/fetures/auth/common/ui/screens/main_bottom_nav_screen.dart';
+import 'package:ecommerce/fetures/auth/ui/screens/email_verification_screens.dart';
 import 'package:ecommerce/fetures/auth/ui/widgets/app_icon_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class Splashscreen extends StatefulWidget {
 class _SplashscreenState extends State<Splashscreen> {
   Future<void> _moveToNextScreen() async{
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushReplacementNamed(context, MainBottomNavScreen.name);
+    Navigator.pushReplacementNamed(context, EmailVerificationScreens.name);
   }
   @override
   void initState() {

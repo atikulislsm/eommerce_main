@@ -1,5 +1,6 @@
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/fetures/auth/common/ui/controller/main_bottom_nav_controller.dart';
+import 'package:ecommerce/fetures/cart/ui/widget/cart_product_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,11 +29,11 @@ class _CartScreensState extends State<CartScreens> {
         ),
         body: Column(
           children: [
-            Expanded(child: ListView.builder(
+            Expanded(
+                child: ListView.builder(
               itemCount: 5,
                 itemBuilder: (context, index){
-              return ListTile(
-              );
+              return const CartProductItemWidget();
             })),
             _buildCheckOutSection(textTheme),
           ],
@@ -68,3 +69,5 @@ class _CartScreensState extends State<CartScreens> {
     );
   }
 }
+
+
