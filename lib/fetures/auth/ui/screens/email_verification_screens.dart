@@ -94,7 +94,7 @@ class _EmailVerificationScreensState extends State<EmailVerificationScreens> {
           _emailController.text.trim());
       if (isSuccess) {
         if (mounted) {
-          Navigator.pushNamed(context, OtpVerificationScreens.name);
+          Navigator.pushNamed(context, OtpVerificationScreens.name, arguments: _emailController.text.trim());
         } else {
           if (mounted) {
             showSnackBarMessage(

@@ -1,7 +1,12 @@
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/fetures/auth/common/ui/controller/category_list_controller.dart';
 import 'package:ecommerce/fetures/auth/common/ui/controller/main_bottom_nav_controller.dart';
 import 'package:ecommerce/fetures/cart/ui/screens/cart_screens.dart';
 import 'package:ecommerce/fetures/catagory/ui/screens/catagory_screens.dart';
+import 'package:ecommerce/fetures/home/ui/controller/home_slider_list_controller.dart';
+import 'package:ecommerce/fetures/home/ui/controller/new_product_list_controller.dart';
+import 'package:ecommerce/fetures/home/ui/controller/popular_product_list_controller.dart';
+import 'package:ecommerce/fetures/home/ui/controller/special_product_list_controller.dart';
 import 'package:ecommerce/fetures/home/ui/screens/home_screens.dart';
 import 'package:ecommerce/fetures/wishlist/ui/screens/wish_list_screens.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +20,23 @@ class MainBottomNavScreen extends StatefulWidget {
   State<MainBottomNavScreen> createState() => _MainBottomNavScreenState();
 }
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
-  // final MainBottomNavController bottomNavController=Get.find<MainBottomNavController>();  (when use getbuilder its easier to smart way)
+  final HomeSliderListController _homeSliderListController=Get.find<HomeSliderListController>();
+   // final MainBottomNavController bottomNavController=Get.find<MainBottomNavController>();  //(when use getbuilder its easier to smart way)
   final List<Widget> _screens=[  // list of screen
     const HomeScreens(),
     const CatagoryScreens(),
     const CartScreens(),
     const WishListScreens()
   ];
+  @override
+  void initState() {
+    super.initState();
+    _homeSliderListController.getHomeBannerList();
+    Get.find<CategoryListController>().getCategoryList();
+    Get.find<PopularProductListController>().getProductList('');
+    Get.find<NewProductListController>().getProductList('');
+    Get.find<SpecialProductListController>().getProductList('');
+  }
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainBottomNavController>(

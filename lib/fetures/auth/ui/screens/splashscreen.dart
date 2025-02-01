@@ -14,7 +14,7 @@ class Splashscreen extends StatefulWidget {
 class _SplashscreenState extends State<Splashscreen> {
   Future<void> _moveToNextScreen() async{
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushReplacementNamed(context, EmailVerificationScreens.name);
+    Navigator.pushReplacementNamed(context, MainBottomNavScreen.name);
   }
   @override
   void initState() {

@@ -3,18 +3,16 @@ import 'package:ecommerce/app/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ProductImageCaroselSliderScreen extends StatefulWidget {
-  ProductImageCaroselSliderScreen({
-    super.key,
+  const ProductImageCaroselSliderScreen({
+    super.key, required this.imageUrl,
   });
-
+final List<String> imageUrl;
   @override
   State<ProductImageCaroselSliderScreen> createState() => _ProductImageCaroselSliderScreenState();
 }
-
 class _ProductImageCaroselSliderScreenState extends State<ProductImageCaroselSliderScreen> {
   final ValueNotifier<int> _selectIndex=ValueNotifier(0);
   final CarouselController _carouselController = CarouselController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +25,16 @@ class _ProductImageCaroselSliderScreenState extends State<ProductImageCaroselSli
               onPageChanged: (currentIndex, reason) {
                 _selectIndex.value=currentIndex;
               }),
-          items: [1,2,3,4,5].map((i) {
+          items: widget.imageUrl.map((url) {
             return Builder(
               builder: (BuildContext context) {
                 return  Container(
                     width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
+                    decoration:  BoxDecoration(
                       color: AppColors.themeColor,
+                      image: DecorationImage(image: NetworkImage(url))
                     ),
                     alignment: Alignment.center,
-                    child: Text('Text $i', style: const TextStyle(fontSize: 16.0),)
                 );
               },
             );
@@ -53,7 +51,7 @@ class _ProductImageCaroselSliderScreenState extends State<ProductImageCaroselSli
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    for(int i=0; i<5; i++)
+                    for(int i=0; i<widget.imageUrl.length; i++)
                       Container(
                         height: 15,
                         width: 15,
@@ -63,15 +61,12 @@ class _ProductImageCaroselSliderScreenState extends State<ProductImageCaroselSli
                           border: Border.all(color: Colors.grey.shade300),
                           borderRadius: BorderRadius.circular(20),
                         ),
-
                       )
                   ],
                 );
               }
           ),
         )
-
-
       ],
     );
 

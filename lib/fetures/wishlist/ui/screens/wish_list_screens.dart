@@ -24,7 +24,7 @@ class _WishListScreensState extends State<WishListScreens> {
           title: const Text('WishList'),
           leading: IconButton(onPressed: (){
             _onPop();
-          }, icon: Icon(Icons.arrow_back_ios)),
+          }, icon: const Icon(Icons.arrow_back_ios)),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8),
@@ -34,7 +34,7 @@ class _WishListScreensState extends State<WishListScreens> {
             ),
             itemCount: 21,
             itemBuilder: (context, index){
-              return const FittedBox(child:  ProductItemWidget());
+              //return const FittedBox(child:  ProductItemWidget());
             },
           ),
         ),

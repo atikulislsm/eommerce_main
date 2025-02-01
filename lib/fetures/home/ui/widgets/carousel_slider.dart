@@ -1,11 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/app/app_colors.dart';
+import 'package:ecommerce/fetures/home/data/model/banner_model.dart';
+
 import 'package:flutter/material.dart';
 
 class CaroselSliderScreen extends StatefulWidget {
-   CaroselSliderScreen({
-    super.key,
+   const CaroselSliderScreen({
+    super.key, required this.bannerList,
   });
+   final List<BannerModel> bannerList;
 
   @override
   State<CaroselSliderScreen> createState() => _CaroselSliderScreenState();
@@ -14,7 +17,6 @@ class CaroselSliderScreen extends StatefulWidget {
 class _CaroselSliderScreenState extends State<CaroselSliderScreen> {
 
 final ValueNotifier<int> _selectIndex=ValueNotifier(0);
-final CarouselController _carouselController = CarouselController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,12 +25,12 @@ final CarouselController _carouselController = CarouselController();
           options: CarouselOptions(
             autoPlay: true,
               autoPlayInterval: const Duration(seconds: 3),
-              height: 200.0,
+              height: 180.0,
               viewportFraction: 0.95,
               onPageChanged: (currentIndex, reason) {
                 _selectIndex.value=currentIndex;
               }),
-          items: [1,2,3,4,5].map((i) {
+          items: widget.bannerList.map((banner) {
             return Builder(
               builder: (BuildContext context) {
                 return  Container(
@@ -36,10 +38,31 @@ final CarouselController _carouselController = CarouselController();
                     margin:  const EdgeInsets.symmetric(horizontal: 2.0),
                     decoration: BoxDecoration(
                         color: AppColors.themeColor,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(image: NetworkImage(banner.image?? ''), fit: BoxFit.cover)
                     ),
-                    alignment: Alignment.center,
-                    child: Text('Text $i', style: const TextStyle(fontSize: 16.0),)
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                           Text(
+                             banner.title??'',
+                             textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                                color: Colors.black
+                          ),
+                      ),
+                      SizedBox(
+                        width: 90,
+                        child: ElevatedButton(onPressed: (){}, child: Text('Buy now')),
+                      )
+                        ],
+                      ),
+                    )
                 );
               },
             );
@@ -52,7 +75,7 @@ final CarouselController _carouselController = CarouselController();
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for(int i=0; i<5; i++)
+                for(int i=0; i < widget.bannerList.length; i++)
                   Container(
                     height: 15,
                     width: 15,
@@ -68,10 +91,7 @@ final CarouselController _carouselController = CarouselController();
             );
           }
         )
-
-
       ],
     );
-
   }
 }

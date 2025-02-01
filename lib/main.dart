@@ -38,7 +38,8 @@ class MyApp extends StatelessWidget {
         }else if(setting.name==ProfileScreens.name){
           widget=const ProfileScreens();
         }else if(setting.name==OtpVerificationScreens.name){
-          widget=const OtpVerificationScreens();
+          String email=setting.arguments as String;
+          widget= OtpVerificationScreens(email: email ,);
         }else if(setting.name==HomeScreens.name){
           widget=const HomeScreens();
         }else if(setting.name==MainBottomNavScreen.name){
@@ -46,8 +47,8 @@ class MyApp extends StatelessWidget {
         }else if(setting.name==CatagoryScreens.name){
           widget=const CatagoryScreens();
         }else if(setting.name==ProductListScreen.name){
-          String name=setting.arguments as String;
-          widget= ProductListScreen(catgoryName: name);
+          Map<String, dynamic> args=setting.arguments as Map<String, dynamic>;
+          widget= ProductListScreen(catgoryName: args['categoryName'], categoryID:args['categoryId'],);
         }else if(setting.name==ProductDetailsScreen.name){
           int productId=setting.arguments as int;
           widget=ProductDetailsScreen(productId: productId,);

@@ -1,6 +1,9 @@
 import 'package:ecommerce/app/app_colors.dart';
 import 'package:ecommerce/fetures/auth/common/ui/controller/main_bottom_nav_controller.dart';
+import 'package:ecommerce/fetures/auth/common/widgets/centerd_circular_progress_indecator.dart';
 import 'package:ecommerce/fetures/home/ui/screens/home_screens.dart';
+import 'package:ecommerce/fetures/product/product/data/model/product_details_model.dart';
+import 'package:ecommerce/fetures/product/ui/controller/productDetailsController.dart';
 import 'package:ecommerce/fetures/product/ui/screens/review_screens.dart';
 import 'package:ecommerce/fetures/product/ui/widgets/color_picker.dart';
 import 'package:ecommerce/fetures/product/ui/widgets/product_Image_carousel_slider.dart';
@@ -21,6 +24,11 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    Get.find<ProductDetailsController>().getProductDetails(widget.productId);
+  }
+  @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
@@ -28,92 +36,111 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         title: const Text('Details'),
         // leading: IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_back_ios))
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ProductImageCaroselSliderScreen(),
-                  Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
+      body: GetBuilder<ProductDetailsController>(
+        builder: (controller) {
+          if(controller.inProgress){
+            return const CenterdCircularProgressIndecator();
+          }
+          if(controller.errorMassage !=null){
+            return Center(
+              child: Text(controller.errorMassage!),
+            );
+          }
+          ProductDetails productDetails=controller.productDetails!;
+
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                       ProductImageCaroselSliderScreen(
+                         imageUrl: [
+                           productDetails.img1!,
+                           productDetails.img2!,
+                           productDetails.img3!,
+                           productDetails.img4!,
+                         ],
+                       ),
+                      Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Nike show A2ERF- New  year Special Deal ',
-                                      style: textTheme.titleMedium?.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      )
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          productDetails.product?.title??'',
+                                          style: textTheme.titleMedium?.copyWith(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          )
+                                        ),
+                                        buildReviewSection(productDetails: productDetails.product!.star??''),
+                                      ],
                                     ),
-                                    buildReviewSection(),
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(width: 8,),
+                                  ProductQuantitiyIncDecScreen(
+                                    onChange: (int value) {},
+                                  ),
+                                ],
                               ),
-                              const SizedBox(width: 8,),
-                              ProductQuantitiyIncDecScreen(
-                                onChange: (int value) {},
-                              ),
+                              const SizedBox(height: 16,),
+                              Text('Color', style: textTheme.titleSmall,),
+                              const SizedBox(height: 8,),
+                              ColorPicker(
+                                color: productDetails.color?.split(',')??[],
+                                onColorSelected: (String selectedColor ) {
+                              },),
+                              const SizedBox(height: 16,),
+                              Text('Size', style: textTheme.titleSmall,),
+                              const SizedBox(height: 8,),
+                              SizePicker(
+                                size: productDetails.size?.split(',')??[],
+                                onSizeSelected: (String selectedColor ) {
+
+                              },),
+                              const SizedBox(height: 16,),
+                              Text('Description', style: textTheme.titleSmall,),
+                              const SizedBox(height: 8,),
+                               Text(productDetails.des??'',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                              ),)
                             ],
                           ),
-                          const SizedBox(height: 16,),
-                          Text('Color', style: textTheme.titleSmall,),
-                          const SizedBox(height: 8,),
-                          ColorPicker(color: const [
-                            'Red','Green','yellow', 'pink'
-                          ], onColorSelected: (String selectedColor ) {
-
-                          },),
-                          const SizedBox(height: 16,),
-                          Text('Size', style: textTheme.titleSmall,),
-                          const SizedBox(height: 8,),
-                          SizePicker(size: const [
-                            'XXL','XL','L', 'M'
-                          ], onSizeSelected: (String selectedColor ) {
-
-                          },),
-                          const SizedBox(height: 16,),
-                          Text('Description', style: textTheme.titleSmall,),
-                          const SizedBox(height: 8,),
-                          const Text('''Lorem Ipsum is simply dummy text of the printing and typesetting
-                           industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,''',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                          ),)
-                        ],
-                      ),
-                    ),
-                ],
+                        ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-          buildPriceAndAddToCartSection(textTheme)
-        ],
+              buildPriceAndAddToCartSection(textTheme, productDetails.product?.price??'0.0')
+            ],
+          );
+        }
       ),
     );
   }
-  Widget buildReviewSection() {
+  Widget buildReviewSection({required Object productDetails}) {
     return Row(
       children: [
-        const Row(
+        Row(
           children: [
-            Icon(
+            const Icon(
               Icons.star,
               size: 18,
               color: Colors.amber,
             ),
             Text(
-              '4.5',
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.w600, color: AppColors.themeColor),
+              '$productDetails',
             ),
           ],
         ),
@@ -136,7 +163,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget buildPriceAndAddToCartSection(TextTheme textTheme) {
+  Widget buildPriceAndAddToCartSection(TextTheme textTheme, String price) {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -146,10 +173,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Price', style: textTheme.titleSmall),
               Text(
-                '\$100',
+                '\$$price',
                 style: textTheme.titleMedium
                     ?.copyWith(color: AppColors.themeColor),
               ),
@@ -158,7 +186,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           SizedBox(
               width: 120,
               child:
-                  ElevatedButton(onPressed: () {}, child: Text('Add to Cart')))
+              ElevatedButton(onPressed: () {}, child: const Text('Add to Cart')))
         ],
       ),
     );
