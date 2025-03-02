@@ -6,7 +6,7 @@ import 'package:ecommerce/fetures/auth/common/ui/screens/main_bottom_nav_screen.
 import 'package:ecommerce/fetures/auth/common/widgets/centerd_circular_progress_indecator.dart';
 import 'package:ecommerce/fetures/auth/common/widgets/snack_bar_message.dart';
 import 'package:ecommerce/fetures/auth/ui/controllers/otp_verification_controller.dart';
-import 'package:ecommerce/fetures/auth/ui/screens/profile_screens.dart';
+import 'package:ecommerce/fetures/auth/ui/screens/sign_up_screens.dart';
 import 'package:ecommerce/fetures/auth/ui/widgets/app_icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,7 +58,7 @@ Future<void> _onTapNextButton() async{
     if(response){
       if(_otpVerificationController.shouldComplteProfile){
         if(mounted){
-          Navigator.pushNamed(context, ProfileScreens.name);
+          Navigator.pushNamed(context, SignUpScreens.name);
         }
       }else{
         if(mounted){

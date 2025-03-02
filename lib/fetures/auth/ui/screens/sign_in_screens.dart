@@ -1,3 +1,4 @@
+import 'package:ecommerce/fetures/auth/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:ecommerce/fetures/auth/common/widgets/centerd_circular_progress_indecator.dart';
 import 'package:ecommerce/fetures/auth/common/widgets/snack_bar_message.dart';
 import 'package:ecommerce/fetures/auth/ui/controllers/sign_in_controller.dart';
@@ -111,7 +112,7 @@ class _SignInScreensState extends State<SignInScreens> {
           _emailController.text.trim(), _passwordController.text);
       if (isSuccess) {
         if (mounted) {
-          Navigator.pushNamed(context, OtpVerificationScreens.name, arguments: _emailController.text.trim());
+          Navigator.pushNamed(context, MainBottomNavScreen.name, arguments: _emailController.text.trim());
         } else {
           if (mounted) {
             showSnackBarMessage(

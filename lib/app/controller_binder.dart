@@ -5,6 +5,7 @@ import 'package:ecommerce/fetures/auth/common/ui/controller/product_list_control
 import 'package:ecommerce/fetures/auth/ui/controllers/sign_in_controller.dart';
 import 'package:ecommerce/fetures/auth/ui/controllers/otp_verification_controller.dart';
 import 'package:ecommerce/fetures/auth/ui/controllers/read_profile_controller.dart';
+import 'package:ecommerce/fetures/auth/ui/controllers/sign_up_controller.dart';
 import 'package:ecommerce/fetures/home/ui/controller/home_slider_list_controller.dart';
 import 'package:ecommerce/fetures/home/ui/controller/new_product_list_controller.dart';
 import 'package:ecommerce/fetures/home/ui/controller/product_list_by_remark_controller.dart';
@@ -24,6 +25,7 @@ class ControllerBinder extends Bindings{
     Get.put(NetworkCaller());
     Get.put(AuthController());
     Get.put(SignInController());
+    Get.put(SignUpController());
     Get.put(OtpVerificationController());
     Get.put(ReadProfileController());
     Get.put(HomeSliderListController());

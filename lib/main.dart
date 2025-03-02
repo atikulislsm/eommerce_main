@@ -2,7 +2,7 @@ import 'package:ecommerce/app/app_theme_data.dart';
 import 'package:ecommerce/app/controller_binder.dart';
 import 'package:ecommerce/fetures/auth/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:ecommerce/fetures/auth/ui/screens/otp_verification_screens.dart';
-import 'package:ecommerce/fetures/auth/ui/screens/profile_screens.dart';
+import 'package:ecommerce/fetures/auth/ui/screens/sign_up_screens.dart';
 import 'package:ecommerce/fetures/auth/ui/screens/splashscreen.dart';
 import 'package:ecommerce/fetures/catagory/ui/screens/catagory_screens.dart';
 import 'package:ecommerce/fetures/home/ui/screens/home_screens.dart';
@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
           widget= const Splashscreen();
         }else if(setting.name==SignInScreens.name){
           widget=const SignInScreens();
-        }else if(setting.name==ProfileScreens.name){
-          widget=const ProfileScreens();
+        }else if(setting.name==SignUpScreens.name){
+          widget=const SignUpScreens();
         }else if(setting.name==OtpVerificationScreens.name){
           String email=setting.arguments as String;
           widget= OtpVerificationScreens(email: email ,);
