@@ -1,7 +1,5 @@
 import 'package:ecommerce/app/app_colors.dart';
-import 'package:ecommerce/fetures/auth/common/ui/controller/main_bottom_nav_controller.dart';
 import 'package:ecommerce/fetures/auth/common/widgets/centerd_circular_progress_indecator.dart';
-import 'package:ecommerce/fetures/home/ui/screens/home_screens.dart';
 import 'package:ecommerce/fetures/product/product/data/model/product_details_model.dart';
 import 'package:ecommerce/fetures/product/ui/controller/productDetailsController.dart';
 import 'package:ecommerce/fetures/product/ui/screens/review_screens.dart';
@@ -25,7 +23,6 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     Get.find<ProductDetailsController>().getProductDetails(widget.productId);
   }
   @override

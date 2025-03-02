@@ -1,25 +1,26 @@
 import 'package:ecommerce/fetures/auth/common/widgets/centerd_circular_progress_indecator.dart';
 import 'package:ecommerce/fetures/auth/common/widgets/snack_bar_message.dart';
-import 'package:ecommerce/fetures/auth/ui/controllers/email_verification_controller.dart';
+import 'package:ecommerce/fetures/auth/ui/controllers/sign_in_controller.dart';
 import 'package:ecommerce/fetures/auth/ui/screens/otp_verification_screens.dart';
 import 'package:ecommerce/fetures/auth/ui/widgets/app_icon_widget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EmailVerificationScreens extends StatefulWidget {
-  const EmailVerificationScreens({super.key});
-  static const String name='/email-verification';
+class SignInScreens extends StatefulWidget {
+  const SignInScreens({super.key});
+  static const String name='/sign-in';
   @override
-  State<EmailVerificationScreens> createState() => _EmailVerificationScreensState();
+  State<SignInScreens> createState() => _SignInScreensState();
 }
 
-class _EmailVerificationScreensState extends State<EmailVerificationScreens> {
+class _SignInScreensState extends State<SignInScreens> {
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final EmailVerificationController _emailVerificationContoller = Get.find<
-      EmailVerificationController>();
+  final SignInController _signInContoller = Get.find<
+      SignInController>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class _EmailVerificationScreensState extends State<EmailVerificationScreens> {
                     .textTheme
                     .titleLarge,),
                 const SizedBox(height: 5),
-                Text('Please enter your email address', style: Theme
+                Text('Please enter your email & password', style: Theme
                     .of(context)
                     .textTheme
                     .bodyLarge
@@ -54,6 +55,7 @@ class _EmailVerificationScreensState extends State<EmailVerificationScreens> {
                       hintText: 'Email Address '
                   ),
                   keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   validator: (String? value) {
                     if (value
                         ?.trim()
@@ -66,8 +68,23 @@ class _EmailVerificationScreensState extends State<EmailVerificationScreens> {
                     return null;
                   },
                 ),
+                const SizedBox(height: 5,),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: const InputDecoration(
+                      hintText: 'Password '
+                  ),
+                  validator: (String? value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'Please enter your Password';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(height: 24,),
-                GetBuilder<EmailVerificationController>(
+                GetBuilder<SignInController>(
                     builder: (controller) {
                       if (controller.inProgress) {
                         return const CenterdCircularProgressIndecator();
@@ -76,7 +93,7 @@ class _EmailVerificationScreensState extends State<EmailVerificationScreens> {
                         onPressed: () {
                           _onTapNextButton();
                         },
-                        child: const Text('Next'),
+                        child: const Text('Sign In'),
                       );
                     }
                 )
@@ -90,15 +107,15 @@ class _EmailVerificationScreensState extends State<EmailVerificationScreens> {
 
   void _onTapNextButton() async {
     if (_formKey.currentState!.validate()) {
-      bool isSuccess = await _emailVerificationContoller.verifyEmail(
-          _emailController.text.trim());
+      bool isSuccess = await _signInContoller.signIn(
+          _emailController.text.trim(), _passwordController.text);
       if (isSuccess) {
         if (mounted) {
           Navigator.pushNamed(context, OtpVerificationScreens.name, arguments: _emailController.text.trim());
         } else {
           if (mounted) {
             showSnackBarMessage(
-                context, _emailVerificationContoller.errorMessage!);
+                context, _signInContoller.errorMessage!);
           }
         }
       }

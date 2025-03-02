@@ -1,5 +1,4 @@
 import 'package:ecommerce/app/app_colors.dart';
-import 'package:ecommerce/app/asset_path.dart';
 import 'package:ecommerce/fetures/auth/common/data/models/product_model.dart';
 import 'package:ecommerce/fetures/product/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';

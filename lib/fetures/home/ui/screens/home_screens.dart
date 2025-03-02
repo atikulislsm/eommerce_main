@@ -6,7 +6,6 @@ import 'package:ecommerce/fetures/auth/common/ui/controller/main_bottom_nav_cont
 import 'package:ecommerce/fetures/home/ui/controller/home_slider_list_controller.dart';
 import 'package:ecommerce/fetures/home/ui/controller/new_product_list_controller.dart';
 import 'package:ecommerce/fetures/home/ui/controller/popular_product_list_controller.dart';
-import 'package:ecommerce/fetures/home/ui/controller/product_list_by_remark_controller.dart';
 import 'package:ecommerce/fetures/home/ui/controller/special_product_list_controller.dart';
 import 'package:ecommerce/fetures/home/ui/widgets/app_bar_icon_button.dart';
 import 'package:ecommerce/fetures/home/ui/widgets/carousel_slider.dart';

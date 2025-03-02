@@ -1,5 +1,4 @@
 import 'package:ecommerce/fetures/auth/common/ui/controller/main_bottom_nav_controller.dart';
-import 'package:ecommerce/fetures/home/ui/widgets/product_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +33,8 @@ class _WishListScreensState extends State<WishListScreens> {
             ),
             itemCount: 21,
             itemBuilder: (context, index){
-              //return const FittedBox(child:  ProductItemWidget());
+              
+              //return const FittedBox(child:  ProductItemWidget(productModel: null,));
             },
           ),
         ),

@@ -2,7 +2,7 @@ import 'package:ecommerce/app/urls.dart';
 import 'package:ecommerce/fetures/service/network%20caller/network_caller.dart';
 import 'package:get/get.dart';
 
-class EmailVerificationController extends GetxController {
+class SignInController extends GetxController {
   bool _inProgress = false;
 
   bool get inProgress => _inProgress;
@@ -11,12 +11,16 @@ class EmailVerificationController extends GetxController {
 
   String? get errorMessage => _errorMessage;
 
-  Future<bool> verifyEmail(String email) async {
+  Future<bool> signIn(String email, String password) async {
     bool isSuccess = false;
     _inProgress = true;
     update();
+    final requestParms={
+      "email":email,
+      "password":password
+    };
     final NetworkResponse response =
-    await Get.find<NetworkCaller>().getRequest(Urls.verifyEmailUrl(email));
+    await Get.find<NetworkCaller>().postRequest(Urls.signInUrl, body: requestParms);
     if (response.isSuccess) {
       _errorMessage = null;
       isSuccess = true;

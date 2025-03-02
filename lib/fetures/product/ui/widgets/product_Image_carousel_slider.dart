@@ -12,7 +12,6 @@ final List<String> imageUrl;
 }
 class _ProductImageCaroselSliderScreenState extends State<ProductImageCaroselSliderScreen> {
   final ValueNotifier<int> _selectIndex=ValueNotifier(0);
-  final CarouselController _carouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {

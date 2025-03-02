@@ -1,6 +1,5 @@
 import 'package:ecommerce/fetures/auth/ui/widgets/app_icon_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ProfileScreens extends StatefulWidget {
   const ProfileScreens({super.key});

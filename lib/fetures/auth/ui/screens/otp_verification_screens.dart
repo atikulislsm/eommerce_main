@@ -6,7 +6,6 @@ import 'package:ecommerce/fetures/auth/common/ui/screens/main_bottom_nav_screen.
 import 'package:ecommerce/fetures/auth/common/widgets/centerd_circular_progress_indecator.dart';
 import 'package:ecommerce/fetures/auth/common/widgets/snack_bar_message.dart';
 import 'package:ecommerce/fetures/auth/ui/controllers/otp_verification_controller.dart';
-import 'package:ecommerce/fetures/auth/ui/controllers/read_profile_controller.dart';
 import 'package:ecommerce/fetures/auth/ui/screens/profile_screens.dart';
 import 'package:ecommerce/fetures/auth/ui/widgets/app_icon_widget.dart';
 import 'package:flutter/material.dart';

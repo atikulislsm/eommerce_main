@@ -13,7 +13,7 @@ import 'package:ecommerce/fetures/product/ui/screens/review_screens.dart';
 import 'package:ecommerce/fetures/wishlist/ui/screens/wish_list_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'fetures/auth/ui/screens/email_verification_screens.dart';
+import 'fetures/auth/ui/screens/sign_in_screens.dart';
 
 void main(){
   runApp(MyApp());
@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
         late Widget widget;
         if(setting.name==Splashscreen.name){
           widget= const Splashscreen();
-        }else if(setting.name==EmailVerificationScreens.name){
-          widget=const EmailVerificationScreens();
+        }else if(setting.name==SignInScreens.name){
+          widget=const SignInScreens();
         }else if(setting.name==ProfileScreens.name){
           widget=const ProfileScreens();
         }else if(setting.name==OtpVerificationScreens.name){
