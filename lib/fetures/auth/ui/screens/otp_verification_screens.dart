@@ -6,7 +6,6 @@ import 'package:ecommerce/fetures/auth/common/ui/screens/main_bottom_nav_screen.
 import 'package:ecommerce/fetures/auth/common/widgets/centerd_circular_progress_indecator.dart';
 import 'package:ecommerce/fetures/auth/common/widgets/snack_bar_message.dart';
 import 'package:ecommerce/fetures/auth/ui/controllers/otp_verification_controller.dart';
-import 'package:ecommerce/fetures/auth/ui/screens/sign_up_screens.dart';
 import 'package:ecommerce/fetures/auth/ui/widgets/app_icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,14 +55,8 @@ Future<void> _onTapNextButton() async{
     final bool response = await _otpVerificationController.verifyOtp(
         widget.email, _otpTeController.text);
     if(response){
-      if(_otpVerificationController.shouldComplteProfile){
-        if(mounted){
-          Navigator.pushNamed(context, SignUpScreens.name);
-        }
-      }else{
         if(mounted){
           Navigator.pushNamedAndRemoveUntil(context, MainBottomNavScreen.name, (predicate) => false);
-        }
       }
     }else{
       if(mounted){
@@ -145,7 +138,7 @@ Future<void> _onTapNextButton() async{
                 PinCodeTextField(
                   controller: _otpTeController,
                   appContext: context,
-                  length: 6,
+                  length: 4,
                   obscureText: true,
                   obscuringCharacter: '*',
                   animationType: AnimationType.fade,
@@ -165,7 +158,7 @@ Future<void> _onTapNextButton() async{
                       activeFillColor: Colors.white,
                       inactiveColor: AppColors.themeColor),
                   validator: (String? value){
-                    if(value?.length !=6){
+                    if(value?.length !=4){
                       return 'Enter your otp';
                     }
                     return null;

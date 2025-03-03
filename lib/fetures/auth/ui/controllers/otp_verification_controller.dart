@@ -1,6 +1,6 @@
 import 'package:ecommerce/app/urls.dart';
 import 'package:ecommerce/fetures/auth/common/ui/controller/auth_controller.dart';
-import 'package:ecommerce/fetures/auth/ui/controllers/read_profile_controller.dart';
+import 'package:ecommerce/fetures/auth/data/models/auth_success_model.dart';
 import 'package:ecommerce/fetures/service/network%20caller/network_caller.dart';
 import 'package:get/get.dart';
 
@@ -11,26 +11,29 @@ class OtpVerificationController extends GetxController {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  bool _shouldComplteProfile=false;
-  bool get shouldComplteProfile => _shouldComplteProfile;
 
 
   Future<bool> verifyOtp(String email, String otp) async {
     bool isSuccess = false;
     _inProgress = true;
     update();
+
+    final Map<String, dynamic> requestParams={
+      "email":email,
+      "otp":otp
+    };
     final NetworkResponse response =
-    await Get.find<NetworkCaller>().getRequest(Urls.verifyOtpUrl(email, otp));
+    await Get.find<NetworkCaller>().postRequest(
+        Urls.verifyOtpUrl,
+      body: requestParams
+    );
     if (response.isSuccess) {
-      _errorMessage = null;
-      isSuccess = true;
-      String token=response.responseData['data'];
-      await Get.find<ReadProfileController>().readPeodileData(token);
-      if(Get.find<ReadProfileController>().profileModel==null){
-        _shouldComplteProfile=true;
-      }else{
-        _shouldComplteProfile=false;
-      }
+      AuthSuccessModel authSuccessModel=AuthSuccessModel.fromJson(response.responseData);
+      await Get.find<AuthController>().saveUserData(
+          authSuccessModel.data!.token!,
+          authSuccessModel.data!.user!
+      );
+
     } else {
       _errorMessage = response.errorMessage;
     }

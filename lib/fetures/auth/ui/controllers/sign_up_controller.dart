@@ -1,6 +1,6 @@
 import 'package:ecommerce/app/urls.dart';
 import 'package:ecommerce/fetures/auth/common/ui/controller/auth_controller.dart';
-import 'package:ecommerce/fetures/auth/data/models/sign_in_model.dart';
+import 'package:ecommerce/fetures/auth/data/models/auth_success_model.dart';
 import 'package:ecommerce/fetures/auth/data/models/sign_up_parms.dart';
 import 'package:ecommerce/fetures/auth/ui/controllers/read_profile_controller.dart';
 import 'package:ecommerce/fetures/service/network%20caller/network_caller.dart';
